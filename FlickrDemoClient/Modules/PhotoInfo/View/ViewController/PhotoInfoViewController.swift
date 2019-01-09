@@ -14,6 +14,7 @@ class PhotoInfoViewController: UIViewController {
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var imgHeight: NSLayoutConstraint!
     
     private var presenter: PhotoInfoPresenterInput!
     
@@ -31,7 +32,9 @@ extension PhotoInfoViewController: PhotoInfoViewInput {
         titleLabel.text = title
     }
     
-    func set(image: URL) {
+    func set(image: URL, imgHeight: String, imgWidth: String) {
+        let height = CGFloat(((Float(imgHeight) ?? 1) / (Float(imgWidth) ?? 1))) * UIScreen.main.bounds.width
+        self.imgHeight.constant = height
         photoImageView.kf.setImage(with: image)
     }
     

@@ -38,8 +38,8 @@ extension PhotoInfoPresenter: PhotoInfoPresenterInput {
 }
 
 extension PhotoInfoPresenter: PhotoInfoInteractorOutput {
-    func setPhotoInfo(title: String, url: URL) {
+    func setPhotoInfo(title: String, url: URL, imgHeight: String, imgWidth: String) {
         view.set(title: title)
-        view.set(image: url)
+        view.set(image: url, imgHeight: imgHeight, imgWidth: imgWidth)
     }
 }

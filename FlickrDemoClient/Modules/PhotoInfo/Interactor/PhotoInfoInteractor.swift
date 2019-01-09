@@ -17,7 +17,7 @@ class PhotoInfoInteractor {
 
 extension PhotoInfoInteractor: PhotoInfoInteractorInput {
     func updatePhotoInfo() {
-        presenter.setPhotoInfo(title: item.title, url: item.imageUrl)
+        presenter.setPhotoInfo(title: item.title, url: item.imageUrl, imgHeight: item.imgHeight, imgWidth: item.imgWidth)
     }
     
     var galleryItem: GalleryItem {

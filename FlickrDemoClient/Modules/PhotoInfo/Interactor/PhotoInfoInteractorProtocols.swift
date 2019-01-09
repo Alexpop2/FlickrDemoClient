@@ -15,5 +15,5 @@ protocol PhotoInfoInteractorInput: class {
 }
 
 protocol PhotoInfoInteractorOutput: class {
-    func setPhotoInfo(title: String, url: URL)
+    func setPhotoInfo(title: String, url: URL, imgHeight: String, imgWidth: String)
 }

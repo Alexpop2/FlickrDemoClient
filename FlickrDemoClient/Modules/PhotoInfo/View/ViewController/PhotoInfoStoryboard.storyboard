@@ -19,7 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="USp-bU-qM6">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="183.5" width="375" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="y1b-PF-PyA"/>
+                                </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avs-l3-ibM">
                                 <rect key="frame" x="16" y="611" width="343" height="36"/>
@@ -44,12 +47,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="USp-bU-qM6" firstAttribute="centerY" secondItem="jBq-CI-cmI" secondAttribute="centerY" id="BMG-18-dbB"/>
                             <constraint firstItem="USp-bU-qM6" firstAttribute="leading" secondItem="b4k-VC-Cdx" secondAttribute="leading" id="Bfx-yi-C0a"/>
                             <constraint firstItem="b4k-VC-Cdx" firstAttribute="bottom" secondItem="avs-l3-ibM" secondAttribute="bottom" constant="20" id="Edl-qa-ypA"/>
                             <constraint firstItem="USp-bU-qM6" firstAttribute="trailing" secondItem="b4k-VC-Cdx" secondAttribute="trailing" id="HGV-LL-ebc"/>
-                            <constraint firstItem="USp-bU-qM6" firstAttribute="top" secondItem="b4k-VC-Cdx" secondAttribute="top" id="KET-X3-Ypk"/>
                             <constraint firstItem="HQI-1m-9Pm" firstAttribute="top" secondItem="b4k-VC-Cdx" secondAttribute="top" constant="10" id="MeM-ui-DwM"/>
-                            <constraint firstItem="USp-bU-qM6" firstAttribute="bottom" secondItem="b4k-VC-Cdx" secondAttribute="bottom" id="QUk-QG-bBw"/>
                             <constraint firstItem="avs-l3-ibM" firstAttribute="leading" secondItem="b4k-VC-Cdx" secondAttribute="leading" constant="16" id="X8g-bv-E9q"/>
                             <constraint firstItem="b4k-VC-Cdx" firstAttribute="trailing" secondItem="avs-l3-ibM" secondAttribute="trailing" constant="16" id="n7D-Ec-8aM"/>
                             <constraint firstItem="b4k-VC-Cdx" firstAttribute="trailing" secondItem="HQI-1m-9Pm" secondAttribute="trailing" constant="10" id="qoX-h9-Q9t"/>
@@ -57,6 +59,7 @@
                         <viewLayoutGuide key="safeArea" id="b4k-VC-Cdx"/>
                     </view>
                     <connections>
+                        <outlet property="imgHeight" destination="y1b-PF-PyA" id="GJM-tc-bMu"/>
                         <outlet property="likeButton" destination="HQI-1m-9Pm" id="RTB-0e-jFR"/>
                         <outlet property="photoImageView" destination="USp-bU-qM6" id="BTZ-5i-ety"/>
                         <outlet property="titleLabel" destination="avs-l3-ibM" id="Qfa-y5-mTH"/>
