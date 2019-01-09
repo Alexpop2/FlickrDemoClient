@@ -13,9 +13,19 @@ struct GalleryItem {
     var id: String
     var name: String
     var url: URL
+    var imgHeight: String
+    var imgWidth: String
 }
 
 extension GalleryItem: GalleryTableViewCellViewModel {
+    var height: String {
+        return imgHeight
+    }
+    
+    var width: String {
+        return imgWidth
+    }
+    
     var imageUrl: URL {
         return url
     }

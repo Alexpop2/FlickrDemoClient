@@ -16,6 +16,8 @@ struct Photo: Codable {
     var id: String
     var title: String
     var url_l: URL
+    var height_l: String
+    var width_l: String
 }
 
 struct Photos: Codable {

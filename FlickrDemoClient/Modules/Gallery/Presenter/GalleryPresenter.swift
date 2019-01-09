@@ -53,7 +53,7 @@ extension GalleryPresenter: GalleryInteractorOutput {
             let id = item.id
             let title = item.title
             let pictureURL = item.url_l
-            let galleryItem = GalleryItem(id: id, name: title, url: pictureURL)
+            let galleryItem = GalleryItem(id: id, name: title, url: pictureURL, imgHeight: item.height_l, imgWidth: item.width_l)
             outArray.append(galleryItem)
         }
         view.display(galleryItems: outArray)

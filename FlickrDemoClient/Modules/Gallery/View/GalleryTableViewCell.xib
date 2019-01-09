@@ -23,7 +23,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="243"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="243" id="8bp-mc-6pj"/>
-                            <constraint firstAttribute="width" constant="320" id="odF-p5-CDF"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMY-nP-3Bd">
@@ -38,14 +37,17 @@
                     <constraint firstItem="AHW-8J-cou" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="EQh-4X-lU9"/>
                     <constraint firstItem="iMY-nP-3Bd" firstAttribute="top" secondItem="AHW-8J-cou" secondAttribute="bottom" constant="10" id="MvH-mL-rGr"/>
                     <constraint firstAttribute="trailing" secondItem="iMY-nP-3Bd" secondAttribute="trailing" constant="10" id="XtS-p4-5FT"/>
-                    <constraint firstItem="AHW-8J-cou" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ama-5J-Sbd"/>
                     <constraint firstAttribute="bottom" secondItem="iMY-nP-3Bd" secondAttribute="bottom" constant="10" id="eYG-7F-EDR"/>
+                    <constraint firstItem="AHW-8J-cou" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="huO-7g-w78"/>
+                    <constraint firstAttribute="trailing" secondItem="AHW-8J-cou" secondAttribute="trailing" id="lEj-6c-JjB"/>
                     <constraint firstItem="AHW-8J-cou" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mnM-AO-Kcn"/>
                     <constraint firstAttribute="trailing" secondItem="AHW-8J-cou" secondAttribute="trailing" id="tAR-VV-wih"/>
+                    <constraint firstItem="AHW-8J-cou" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="xdj-Pi-6A8"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="pictureHeight" destination="8bp-mc-6pj" id="wNl-Gs-dcV"/>
                 <outlet property="pictureImageView" destination="AHW-8J-cou" id="5hx-ZM-YwX"/>
                 <outlet property="titleLabel" destination="iMY-nP-3Bd" id="e5a-tL-Hrt"/>
             </connections>

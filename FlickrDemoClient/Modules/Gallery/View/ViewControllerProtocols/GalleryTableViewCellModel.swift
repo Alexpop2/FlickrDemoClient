@@ -12,4 +12,6 @@ import UIKit
 protocol GalleryTableViewCellViewModel {
     var title: String { get }
     var imageUrl: URL { get }
+    var height: String { get }
+    var width: String { get }
 }

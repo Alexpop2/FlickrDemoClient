@@ -52,7 +52,7 @@ extension GalleryViewController {
     private func setUpUI() {
         tableView.register(galleryTableViewCellNib, forCellReuseIdentifier: reusableCellIdentifier)
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 284
+        tableView.estimatedRowHeight = 1000
         tableView.dataSource = self
         tableView.delegate = self
     }
