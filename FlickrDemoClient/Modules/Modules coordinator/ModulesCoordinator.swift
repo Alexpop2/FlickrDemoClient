@@ -13,24 +13,38 @@ class ModulesCoordinator {
     
     private let internetService: InternetServiceInput
     private let database: DatabaseServiceInput
+    private var navigationController: UINavigationController
+    private var viewControllers: [UIViewController]
+    
     
     func rootModuleController() -> UIViewController {
         let galleryAssembly = GalleryAssembly()
         guard let gallery = galleryAssembly.build(internetService: internetService,
                                                   database: database)
             else { return UIViewController() }
-        return gallery.controller
+        gallery.presenter.output = self
+        viewControllers.append(gallery.controller)
+        navigationController.viewControllers = viewControllers
+        return navigationController
     }
     
     init(internetService: InternetServiceInput, database: DatabaseServiceInput) {
         self.internetService = internetService
         self.database = database
+        self.navigationController = UINavigationController()
+        navigationController.navigationBar.prefersLargeTitles = true
+        viewControllers = [UIViewController]()
     }
 }
 
 extension ModulesCoordinator: GalleryPresenterOutput {
-    func updateDataSource(data: [GalleryItem]) {
-        
+    func showPostDetails(post: GalleryItem) {
+        let photoInfoAssembly = PhotoInfoAssembly()
+        guard let photoInfo = photoInfoAssembly.build(internetService: internetService,
+                                                      database: database)
+            else { return }
+        photoInfo.presenter.interactorInput.galleryItem = post
+        navigationController.pushViewController(photoInfo.controller, animated: true)
     }
 }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 class PhotoInfoViewController: UIViewController {
     @IBOutlet weak var photoImageView: UIImageView!
@@ -18,10 +19,22 @@ class PhotoInfoViewController: UIViewController {
     
     @IBAction func likeButtonPressed(_ sender: UIButton) {
     }
-    
+ 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        presenter.updatePhotoInfo()
+    }
 }
 
 extension PhotoInfoViewController: PhotoInfoViewInput {
+    func set(title: String) {
+        titleLabel.text = title
+    }
+    
+    func set(image: URL) {
+        photoImageView.kf.setImage(with: image)
+    }
+    
     var presenterInput: PhotoInfoPresenterInput {
         get {
             return presenter

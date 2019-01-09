@@ -14,6 +14,10 @@ class PhotoInfoPresenter {
 }
 
 extension PhotoInfoPresenter: PhotoInfoPresenterInput {
+    func updatePhotoInfo() {
+        interactor.updatePhotoInfo()
+    }
+    
     var viewInput: PhotoInfoViewInput {
         get {
             return view
@@ -34,5 +38,8 @@ extension PhotoInfoPresenter: PhotoInfoPresenterInput {
 }
 
 extension PhotoInfoPresenter: PhotoInfoInteractorOutput {
-    
+    func setPhotoInfo(title: String, url: URL) {
+        view.set(title: title)
+        view.set(image: url)
+    }
 }

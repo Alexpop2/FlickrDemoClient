@@ -13,7 +13,7 @@
         <!--Photo Info View Controller-->
         <scene sceneID="6W9-vg-AhN">
             <objects>
-                <viewController id="D9T-uc-GB6" customClass="PhotoInfoViewController" customModule="FlickrDemoClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhotoInfoViewControllerIdentifier" id="D9T-uc-GB6" customClass="PhotoInfoViewController" customModule="FlickrDemoClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jBq-CI-cmI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

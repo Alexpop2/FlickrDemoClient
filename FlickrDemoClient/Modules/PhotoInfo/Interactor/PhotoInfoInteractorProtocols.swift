@@ -10,7 +10,10 @@ import Foundation
 
 protocol PhotoInfoInteractorInput: class {
     var output: PhotoInfoInteractorOutput { get set }
+    var galleryItem: GalleryItem { get set }
+    func updatePhotoInfo()
 }
 
 protocol PhotoInfoInteractorOutput: class {
+    func setPhotoInfo(title: String, url: URL)
 }

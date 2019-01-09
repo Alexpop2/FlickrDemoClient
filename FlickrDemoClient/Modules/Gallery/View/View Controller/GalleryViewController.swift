@@ -78,6 +78,11 @@ extension GalleryViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate Implementation
+
 extension GalleryViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.presenter.output.showPostDetails(post: dataSource[indexPath.row])
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }

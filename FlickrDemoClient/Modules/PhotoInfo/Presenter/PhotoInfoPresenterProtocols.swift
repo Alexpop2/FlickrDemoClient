@@ -11,6 +11,7 @@ import Foundation
 protocol PhotoInfoPresenterInput: class {
     var viewInput: PhotoInfoViewInput { get set }
     var interactorInput: PhotoInfoInteractorInput { get set }
+    func updatePhotoInfo()
 }
 
 protocol PhotoInfoPresenterOutput: class {

@@ -10,4 +10,6 @@ import Foundation
 
 protocol PhotoInfoViewInput: class {
     var presenterInput: PhotoInfoPresenterInput { get set }
+    func set(title: String)
+    func set(image: URL)
 }

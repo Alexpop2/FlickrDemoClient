@@ -15,11 +15,21 @@ import Kingfisher
 class GalleryPresenter {
     private weak var view: GalleryViewInput!
     private var interactor: GalleryInteractorInput!
+    private weak var coordinator: GalleryPresenterOutput!
 }
 
 // MARK: - GalleryPresenterInput protocol implementation
 
 extension GalleryPresenter: GalleryPresenterInput {
+    var output: GalleryPresenterOutput {
+        get {
+            return coordinator
+        }
+        set {
+            coordinator = newValue
+        }
+    }
+    
     var viewInput: GalleryViewInput {
         get {
             return view

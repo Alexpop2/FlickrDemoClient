@@ -10,16 +10,16 @@ import Foundation
 import UIKit
 
 class PhotoInfoAssembly {
-    func build(internetService: InternetServiceInput, database: DatabaseServiceInput) -> (controller: UIViewController, presenter: GalleryPresenterInput)? {
+    func build(internetService: InternetServiceInput,
+               database: DatabaseServiceInput) -> (controller: UIViewController, presenter: PhotoInfoPresenterInput)? {
         let storyboard = UIStoryboard(name: "PhotoInfoStoryboard", bundle: nil)
-        let rootVC = storyboard.instantiateViewController(withIdentifier: "GalleryNavigationControllerIdentifier")
-        guard let navigationVC = rootVC as? UINavigationController,
-            let galleryVC = navigationVC.viewControllers.first as? GalleryViewController else {
-                return nil
+        let rootVC = storyboard.instantiateViewController(withIdentifier: "PhotoInfoViewControllerIdentifier")
+        guard let galleryVC = rootVC as? PhotoInfoViewController else {
+            return nil
         }
         
-        let presenter = GalleryPresenter()
-        let interactor = GalleryInteractor()
+        let presenter = PhotoInfoPresenter()
+        let interactor = PhotoInfoInteractor()
         
         galleryVC.presenterInput = presenter
         presenter.interactorInput = interactor
@@ -29,6 +29,6 @@ class PhotoInfoAssembly {
         interactor.internetService = internetService
         interactor.database = database
         
-        return(controller: navigationVC, presenter: presenter)
+        return(controller: galleryVC, presenter: presenter)
     }
 }

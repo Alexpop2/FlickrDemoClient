@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 
 class GalleryAssembly {
-    func build(internetService: InternetServiceInput, database: DatabaseServiceInput) -> (controller: UIViewController, presenter: GalleryPresenterInput)? {
+    func build(internetService: InternetServiceInput,
+               database: DatabaseServiceInput) -> (controller: UIViewController, presenter: GalleryPresenterInput)? {
         let storyboard = UIStoryboard(name: "GalleryStoryboard", bundle: nil)
-        let rootVC = storyboard.instantiateViewController(withIdentifier: "GalleryNavigationControllerIdentifier")
-        guard let navigationVC = rootVC as? UINavigationController,
-        let galleryVC = navigationVC.viewControllers.first as? GalleryViewController else {
+        let rootVC = storyboard.instantiateViewController(withIdentifier: "GalleryViewControllerIdentifier")
+        guard let galleryVC = rootVC as? GalleryViewController else {
             return nil
         }
         
@@ -29,6 +29,6 @@ class GalleryAssembly {
         interactor.internetService = internetService
         interactor.database = database
         
-        return(controller: navigationVC, presenter: presenter)
+        return(controller: galleryVC, presenter: presenter)
     }
 }
