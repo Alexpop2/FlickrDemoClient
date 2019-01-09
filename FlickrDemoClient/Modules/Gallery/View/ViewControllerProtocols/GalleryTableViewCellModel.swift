@@ -11,5 +11,5 @@ import UIKit
 
 protocol GalleryTableViewCellViewModel {
     var title: String { get }
-    var image: UIImageView { get }
+    var imageUrl: URL { get }
 }

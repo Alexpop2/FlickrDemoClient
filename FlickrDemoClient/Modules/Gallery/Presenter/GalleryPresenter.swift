@@ -53,10 +53,7 @@ extension GalleryPresenter: GalleryInteractorOutput {
             let id = item.id
             let title = item.title
             let pictureURL = item.url_l
-            let picture = UIImageView()
-            picture.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-            picture.kf.setImage(with: pictureURL)
-            let galleryItem = GalleryItem(id: id, name: title, picture: picture)
+            let galleryItem = GalleryItem(id: id, name: title, url: pictureURL)
             outArray.append(galleryItem)
         }
         view.display(galleryItems: outArray)

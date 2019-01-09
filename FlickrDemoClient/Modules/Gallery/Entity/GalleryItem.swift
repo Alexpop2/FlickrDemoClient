@@ -12,18 +12,15 @@ import UIKit
 struct GalleryItem {
     var id: String
     var name: String
-    var picture: UIImageView?
+    var url: URL
 }
 
 extension GalleryItem: GalleryTableViewCellViewModel {
+    var imageUrl: URL {
+        return url
+    }
+    
     var title: String {
         return name
     }
-    
-    var image: UIImageView {
-        guard let picture = picture else { return UIImageView() }
-        return picture
-    }
-    
-    
 }

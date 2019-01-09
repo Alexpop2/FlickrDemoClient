@@ -18,7 +18,7 @@ class GalleryTableViewCell: UITableViewCell {
         didSet {
             guard let viewModel = viewModel else { return }
             titleLabel.text = viewModel.title
-            pictureImageView = viewModel.image
+            pictureImageView.kf.setImage(with: viewModel.imageUrl)
         }
     }
 }
