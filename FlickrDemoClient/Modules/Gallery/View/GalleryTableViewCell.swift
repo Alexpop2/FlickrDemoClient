@@ -19,9 +19,10 @@ class GalleryTableViewCell: UITableViewCell {
         didSet {
             guard let viewModel = viewModel else { return }
             titleLabel.text = viewModel.title
-            let height = CGFloat(((Float(viewModel.height) ?? 1) / (Float(viewModel.width) ?? 1))) * UIScreen.main.bounds.width
-            pictureHeight.constant = height
+            //let height = CGFloat(((Float(viewModel.height) ?? 1) / (Float(viewModel.width) ?? 1))) * UIScreen.main.bounds.width
+            //pictureHeight.constant = height
             pictureImageView.kf.setImage(with: viewModel.imageUrl)
+            //pictureHeight.priority = UILayoutPriority(999)
         }
     }
 }
