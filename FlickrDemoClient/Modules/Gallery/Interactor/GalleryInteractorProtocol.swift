@@ -11,7 +11,9 @@ import Foundation
 protocol GalleryInteractorInput: class {
     var output: GalleryInteractorOutput { get set }
     func updateImages()
+    func loadFavourites()
     func operateWithFavourite(id: String, status: Bool)
+    func addFavouritesToDB(items: [PostEntity])
 }
 
 protocol GalleryInteractorOutput: class {

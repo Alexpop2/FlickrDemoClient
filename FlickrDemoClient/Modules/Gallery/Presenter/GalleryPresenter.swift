@@ -49,6 +49,7 @@ extension GalleryPresenter: GalleryPresenterInput {
     }
     
     func updatePictures() {
+        interactor.loadFavourites()
         interactor.updateImages()
     }
 }
@@ -58,6 +59,7 @@ extension GalleryPresenter: GalleryPresenterInput {
 extension GalleryPresenter: GalleryInteractorOutput {
     func setDataSource(parsedInput: FlickrResponse, favouriteList: [String]) {
         var outArray = [GalleryItem]()
+        var favouriteItemList = [PostEntity]()
         guard let photosArray = parsedInput.photos?.photo else { return }
         for item in photosArray {
             let id = item.id
@@ -71,7 +73,17 @@ extension GalleryPresenter: GalleryInteractorOutput {
                                           imgWidth: item.width_l,
                                           favouriteIcon: favourite)
             outArray.append(galleryItem)
+            if(favourite) {
+                let favouriteItem = PostEntity()
+                favouriteItem.id = id
+                favouriteItem.title = title
+                favouriteItem.url = item.url_l.absoluteString
+                favouriteItem.imgHeight = item.height_l
+                favouriteItem.imgWidth = item.width_l
+                favouriteItemList.append(favouriteItem)
+            }
         }
+        interactor.addFavouritesToDB(items: favouriteItemList)
         view.display(galleryItems: outArray)
     }
 }

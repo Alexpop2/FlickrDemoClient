@@ -22,6 +22,17 @@ class GalleryInteractor {
 // MARK: - GalleryInteractorInput protocol implementation
 
 extension GalleryInteractor: GalleryInteractorInput {
+    func loadFavourites() {
+        let loadEntities = database.loadEntites()
+        for entity in loadEntities {
+            favouriteList.append(entity.id)
+        }
+    }
+    
+    func addFavouritesToDB(items: [PostEntity]) {
+        database.saveEntites(data: items)
+    }
+    
     func operateWithFavourite(id: String, status: Bool) {
         if(favouriteList.contains(id)) {
             favouriteList = favouriteList.filter { $0 != id }
