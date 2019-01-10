@@ -16,8 +16,21 @@ class PhotoInfoInteractor {
 }
 
 extension PhotoInfoInteractor: PhotoInfoInteractorInput {
+    func favouriteButtonClick() {
+        if(item.favouriteIcon) {
+            item.favouriteIcon = false
+        } else {
+            item.favouriteIcon = true
+        }
+        presenter.updateFavourite(id: item.id, favourite: item.favouriteIcon)
+    }
+    
     func updatePhotoInfo() {
-        presenter.setPhotoInfo(title: item.title, url: item.imageUrl, imgHeight: item.imgHeight, imgWidth: item.imgWidth)
+        presenter.setPhotoInfo(title: item.title,
+                               url: item.imageUrl,
+                               imgHeight: item.imgHeight,
+                               imgWidth: item.imgWidth,
+                               favourite: item.favouriteIcon)
     }
     
     var galleryItem: GalleryItem {

@@ -14,4 +14,5 @@ protocol GalleryTableViewCellViewModel {
     var imageUrl: URL { get }
     var height: String { get }
     var width: String { get }
+    var favourite: Bool { get }
 }

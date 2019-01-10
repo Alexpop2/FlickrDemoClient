@@ -15,9 +15,14 @@ struct GalleryItem {
     var url: URL
     var imgHeight: String
     var imgWidth: String
+    var favouriteIcon: Bool
 }
 
 extension GalleryItem: GalleryTableViewCellViewModel {
+    var favourite: Bool {
+        return favouriteIcon
+    }
+    
     var height: String {
         return imgHeight
     }
@@ -33,4 +38,5 @@ extension GalleryItem: GalleryTableViewCellViewModel {
     var title: String {
         return name
     }
+    
 }

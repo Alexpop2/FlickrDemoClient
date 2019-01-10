@@ -19,6 +19,7 @@ class PhotoInfoViewController: UIViewController {
     private var presenter: PhotoInfoPresenterInput!
     
     @IBAction func likeButtonPressed(_ sender: UIButton) {
+        presenter.favouriteButtonClick()
     }
  
     override func viewDidLoad() {
@@ -28,6 +29,14 @@ class PhotoInfoViewController: UIViewController {
 }
 
 extension PhotoInfoViewController: PhotoInfoViewInput {
+    func setFavouriteIcon(flag: Bool) {
+        var buttonImage = #imageLiteral(resourceName: "baseline_favorite_border_black_36pt")
+        if(flag) {
+            buttonImage = #imageLiteral(resourceName: "baseline_favorite_black_36pt")
+        }
+        likeButton.setImage(buttonImage, for: .normal)
+    }
+    
     func set(title: String) {
         titleLabel.text = title
     }

@@ -28,12 +28,22 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grf-YJ-5ZJ">
+                        <rect key="frame" x="280" y="15" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="grf-YJ-5ZJ" secondAttribute="height" multiplier="1:1" id="eXC-WP-qVr"/>
+                            <constraint firstAttribute="width" constant="25" id="tpf-P7-Xgo"/>
+                        </constraints>
+                        <state key="normal" title="Button" backgroundImage="baseline_favorite_black_36pt"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="iMY-nP-3Bd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="8kp-Tc-tjh"/>
                     <constraint firstItem="AHW-8J-cou" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="EQh-4X-lU9"/>
                     <constraint firstItem="iMY-nP-3Bd" firstAttribute="top" secondItem="AHW-8J-cou" secondAttribute="bottom" constant="10" id="MvH-mL-rGr"/>
+                    <constraint firstItem="grf-YJ-5ZJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="OtI-XM-r7g"/>
                     <constraint firstAttribute="trailing" secondItem="iMY-nP-3Bd" secondAttribute="trailing" constant="10" id="XtS-p4-5FT"/>
+                    <constraint firstAttribute="trailing" secondItem="grf-YJ-5ZJ" secondAttribute="trailing" constant="15" id="Zll-jM-SyD"/>
                     <constraint firstAttribute="bottom" secondItem="iMY-nP-3Bd" secondAttribute="bottom" constant="10" id="eYG-7F-EDR"/>
                     <constraint firstItem="AHW-8J-cou" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="huO-7g-w78"/>
                     <constraint firstAttribute="trailing" secondItem="AHW-8J-cou" secondAttribute="trailing" id="lEj-6c-JjB"/>
@@ -44,10 +54,14 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="favouriteIcon" destination="grf-YJ-5ZJ" id="lIv-5S-BTr"/>
                 <outlet property="pictureImageView" destination="AHW-8J-cou" id="5hx-ZM-YwX"/>
                 <outlet property="titleLabel" destination="iMY-nP-3Bd" id="e5a-tL-Hrt"/>
             </connections>
             <point key="canvasLocation" x="52.799999999999997" y="161.01949025487258"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="baseline_favorite_black_36pt" width="72" height="72"/>
+    </resources>
 </document>

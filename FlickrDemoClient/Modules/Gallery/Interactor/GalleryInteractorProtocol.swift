@@ -11,8 +11,9 @@ import Foundation
 protocol GalleryInteractorInput: class {
     var output: GalleryInteractorOutput { get set }
     func updateImages()
+    func operateWithFavourite(id: String, status: Bool)
 }
 
 protocol GalleryInteractorOutput: class {
-    func setDataSource(parsedInput: FlickrResponse)
+    func setDataSource(parsedInput: FlickrResponse, favouriteList: [String])
 }

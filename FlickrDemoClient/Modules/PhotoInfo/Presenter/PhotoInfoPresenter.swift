@@ -11,9 +11,23 @@ import Foundation
 class PhotoInfoPresenter {
     private weak var view: PhotoInfoViewInput!
     private var interactor: PhotoInfoInteractorInput!
+    private var coordinator: PhotoInfoPresenterOutput!
 }
 
 extension PhotoInfoPresenter: PhotoInfoPresenterInput {
+    func favouriteButtonClick() {
+        interactor.favouriteButtonClick()
+    }
+    
+    var output: PhotoInfoPresenterOutput {
+        get {
+            return coordinator
+        }
+        set {
+            coordinator = newValue
+        }
+    }
+    
     func updatePhotoInfo() {
         interactor.updatePhotoInfo()
     }
@@ -38,8 +52,14 @@ extension PhotoInfoPresenter: PhotoInfoPresenterInput {
 }
 
 extension PhotoInfoPresenter: PhotoInfoInteractorOutput {
-    func setPhotoInfo(title: String, url: URL, imgHeight: String, imgWidth: String) {
+    func updateFavourite(id: String, favourite: Bool) {
+        view.setFavouriteIcon(flag: favourite)
+        coordinator.updateFavourite(id: id, favourite: favourite)
+    }
+    
+    func setPhotoInfo(title: String, url: URL, imgHeight: String, imgWidth: String, favourite: Bool) {
         view.set(title: title)
         view.set(image: url, imgHeight: imgHeight, imgWidth: imgWidth)
+        view.setFavouriteIcon(flag: favourite)
     }
 }

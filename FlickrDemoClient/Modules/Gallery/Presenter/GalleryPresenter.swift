@@ -56,14 +56,20 @@ extension GalleryPresenter: GalleryPresenterInput {
 // MARK: - GalleryInteractorOutput protocol implementation
 
 extension GalleryPresenter: GalleryInteractorOutput {
-    func setDataSource(parsedInput: FlickrResponse) {
+    func setDataSource(parsedInput: FlickrResponse, favouriteList: [String]) {
         var outArray = [GalleryItem]()
         guard let photosArray = parsedInput.photos?.photo else { return }
         for item in photosArray {
             let id = item.id
             let title = item.title
             let pictureURL = item.url_l
-            let galleryItem = GalleryItem(id: id, name: title, url: pictureURL, imgHeight: item.height_l, imgWidth: item.width_l)
+            let favourite = favouriteList.contains(id)
+            let galleryItem = GalleryItem(id: id,
+                                          name: title,
+                                          url: pictureURL,
+                                          imgHeight: item.height_l,
+                                          imgWidth: item.width_l,
+                                          favouriteIcon: favourite)
             outArray.append(galleryItem)
         }
         view.display(galleryItems: outArray)

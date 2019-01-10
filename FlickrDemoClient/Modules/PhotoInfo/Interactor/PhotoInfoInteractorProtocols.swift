@@ -12,8 +12,10 @@ protocol PhotoInfoInteractorInput: class {
     var output: PhotoInfoInteractorOutput { get set }
     var galleryItem: GalleryItem { get set }
     func updatePhotoInfo()
+    func favouriteButtonClick()
 }
 
 protocol PhotoInfoInteractorOutput: class {
-    func setPhotoInfo(title: String, url: URL, imgHeight: String, imgWidth: String)
+    func setPhotoInfo(title: String, url: URL, imgHeight: String, imgWidth: String, favourite: Bool)
+    func updateFavourite(id: String, favourite: Bool)
 }
