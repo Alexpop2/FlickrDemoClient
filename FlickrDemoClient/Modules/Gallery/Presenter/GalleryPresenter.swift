@@ -83,7 +83,7 @@ extension GalleryPresenter: GalleryInteractorOutput {
                 favouriteItemList.append(favouriteItem)
             }
         }
-        interactor.addFavouritesToDB(items: favouriteItemList)
+        //interactor.addFavouritesToDB(items: favouriteItemList)
         view.display(galleryItems: outArray)
     }
 }

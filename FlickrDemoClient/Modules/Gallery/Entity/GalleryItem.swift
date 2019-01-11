@@ -40,3 +40,7 @@ extension GalleryItem: GalleryTableViewCellViewModel {
     }
     
 }
+
+extension GalleryItem: FavouritesTableViewCellViewModel {
+    
+}

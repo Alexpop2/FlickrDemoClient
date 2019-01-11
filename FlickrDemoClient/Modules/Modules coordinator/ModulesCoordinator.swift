@@ -14,8 +14,11 @@ class ModulesCoordinator {
     private let internetService: InternetServiceInput
     private let database: DatabaseServiceInput
     private var navigationController: UINavigationController
+    private var tabBarController: GalleryTabBarController
     private var viewControllers: [UIViewController]
+    private var currentPresenter: MainPresenter!
     private var galleryPresenter: GalleryPresenterInput!
+    private var favouritesPresenter: FavouritesPresenterInput!
     
     
     func rootModuleController() -> UIViewController {
@@ -25,15 +28,27 @@ class ModulesCoordinator {
             else { return UIViewController() }
         galleryPresenter = gallery.presenter
         gallery.presenter.output = self
+        gallery.controller.tabBarItem = UITabBarItem(tabBarSystemItem: .recents, tag: 0)
         viewControllers.append(gallery.controller)
-        navigationController.viewControllers = viewControllers
+        
+        let favouritesAssembly = FavouritesAssembly()
+        guard let favourites = favouritesAssembly.build(internetService: internetService,
+                                                  database: database)
+            else { return UIViewController() }
+        favouritesPresenter = favourites.presenter
+        favourites.presenter.output = self
+        favourites.controller.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+        viewControllers.append(favourites.controller)
+        
+        tabBarController.viewControllers = viewControllers
         return navigationController
     }
     
     init(internetService: InternetServiceInput, database: DatabaseServiceInput) {
         self.internetService = internetService
         self.database = database
-        self.navigationController = UINavigationController()
+        self.tabBarController = GalleryTabBarController()
+        self.navigationController = UINavigationController(rootViewController: tabBarController)
         navigationController.navigationBar.prefersLargeTitles = true
         viewControllers = [UIViewController]()
     }
@@ -54,7 +69,10 @@ extension ModulesCoordinator: GalleryPresenterOutput {
 extension ModulesCoordinator: PhotoInfoPresenterOutput {
     func updateFavourite(id: String, favourite: Bool) {
         galleryPresenter.interactorInput.operateWithFavourite(id: id, status: favourite)
+        favouritesPresenter.interactorInput.operateWithFavourite(id: id, status: favourite)
     }
-    
+}
+
+extension ModulesCoordinator: FavouritesPresenterOutput {
     
 }

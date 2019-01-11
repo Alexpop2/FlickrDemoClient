@@ -17,10 +17,18 @@ class PhotoInfoInteractor {
 
 extension PhotoInfoInteractor: PhotoInfoInteractorInput {
     func favouriteButtonClick() {
+        let postEntity = PostEntity()
+        postEntity.id = item.id
+        postEntity.title = item.title
+        postEntity.url = item.url.absoluteString
+        postEntity.imgHeight = item.imgHeight
+        postEntity.imgWidth = item.imgWidth
         if(item.favouriteIcon) {
             item.favouriteIcon = false
+            database.deleteEntity(galleryItem: postEntity)
         } else {
             item.favouriteIcon = true
+            database.addEntity(galleryItem: postEntity)
         }
         presenter.updateFavourite(id: item.id, favourite: item.favouriteIcon)
     }
