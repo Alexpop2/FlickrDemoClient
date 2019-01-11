@@ -7,9 +7,12 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct PostEntity {
-    var id: String
-    var title: String
-    var url: URL
+class PostEntity: Object {
+    @objc dynamic var id: String!
+    @objc dynamic var title: String!
+    @objc dynamic var url: String!
+    @objc dynamic var imgHeight: String!
+    @objc dynamic var imgWidth: String!
 }

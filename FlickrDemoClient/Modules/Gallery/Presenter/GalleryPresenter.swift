@@ -15,11 +15,21 @@ import Kingfisher
 class GalleryPresenter {
     private weak var view: GalleryViewInput!
     private var interactor: GalleryInteractorInput!
+    private weak var coordinator: GalleryPresenterOutput!
 }
 
 // MARK: - GalleryPresenterInput protocol implementation
 
 extension GalleryPresenter: GalleryPresenterInput {
+    var output: GalleryPresenterOutput {
+        get {
+            return coordinator
+        }
+        set {
+            coordinator = newValue
+        }
+    }
+    
     var viewInput: GalleryViewInput {
         get {
             return view
@@ -39,6 +49,7 @@ extension GalleryPresenter: GalleryPresenterInput {
     }
     
     func updatePictures() {
+        interactor.loadFavourites()
         interactor.updateImages()
     }
 }
@@ -46,19 +57,33 @@ extension GalleryPresenter: GalleryPresenterInput {
 // MARK: - GalleryInteractorOutput protocol implementation
 
 extension GalleryPresenter: GalleryInteractorOutput {
-    func setDataSource(parsedInput: FlickrResponse) {
+    func setDataSource(parsedInput: FlickrResponse, favouriteList: [String]) {
         var outArray = [GalleryItem]()
+        var favouriteItemList = [PostEntity]()
         guard let photosArray = parsedInput.photos?.photo else { return }
         for item in photosArray {
             let id = item.id
             let title = item.title
             let pictureURL = item.url_l
-            let picture = UIImageView()
-            picture.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-            picture.kf.setImage(with: pictureURL)
-            let galleryItem = GalleryItem(id: id, name: title, picture: picture)
+            let favourite = favouriteList.contains(id)
+            let galleryItem = GalleryItem(id: id,
+                                          name: title,
+                                          url: pictureURL,
+                                          imgHeight: item.height_l,
+                                          imgWidth: item.width_l,
+                                          favouriteIcon: favourite)
             outArray.append(galleryItem)
+            if(favourite) {
+                let favouriteItem = PostEntity()
+                favouriteItem.id = id
+                favouriteItem.title = title
+                favouriteItem.url = item.url_l.absoluteString
+                favouriteItem.imgHeight = item.height_l
+                favouriteItem.imgWidth = item.width_l
+                favouriteItemList.append(favouriteItem)
+            }
         }
+        //interactor.addFavouritesToDB(items: favouriteItemList)
         view.display(galleryItems: outArray)
     }
 }

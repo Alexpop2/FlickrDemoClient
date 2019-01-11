@@ -1,24 +1,20 @@
 //
-//  GalleryViewController.swift
+//  FavouritesViewController.swift
 //  FlickrDemoClient
 //
-//  Created by Igor on 04/01/2019.
+//  Created by Рабочий on 10/01/2019.
 //  Copyright © 2019 Igor. All rights reserved.
 //
 
 import Foundation
 import UIKit
-import Kingfisher
 
-// MARK: - Properties and lifecycle
-
-class GalleryViewController: UIViewController {
-    
+class FavouritesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
-    private let galleryTableViewCellNib = UINib(nibName: "GalleryTableViewCell", bundle: nil)
-    private let reusableCellIdentifier = "GalleryCellReusableIdentyfier"
-    private var presenter: GalleryPresenterInput!
+    private let galleryTableViewCellNib = UINib(nibName: "FavouritesTableViewCell", bundle: nil)
+    private let reusableCellIdentifier = "FavouritesCellReusableIdentyfier"
+    private var presenter: FavouritesPresenterInput!
     private var dataSource = [GalleryItem]()
     
     override func viewDidLoad() {
@@ -30,13 +26,13 @@ class GalleryViewController: UIViewController {
 
 // MARK: - GalleryViewInput protocol implementation
 
-extension GalleryViewController: GalleryViewInput {
-    var presenterInput: GalleryPresenterInput {
+extension FavouritesViewController: FavouritesViewInput {
+    var presenterInput: FavouritesPresenterInput {
         get {
             return presenter
         }
         set {
-            presenter = newValue as! GalleryPresenter
+            presenter = newValue as! FavouritesPresenter
         }
     }
     
@@ -48,7 +44,7 @@ extension GalleryViewController: GalleryViewInput {
 
 // MARK: - Setting up UI for custom tableView cell
 
-extension GalleryViewController {
+extension FavouritesViewController {
     private func setUpUI() {
         tableView.register(galleryTableViewCellNib, forCellReuseIdentifier: reusableCellIdentifier)
         tableView.rowHeight = UITableView.automaticDimension
@@ -60,14 +56,14 @@ extension GalleryViewController {
 
 // MARK: - TableView protocols implementation
 
-extension GalleryViewController: UITableViewDataSource {
+extension FavouritesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reusableCellIdentifier,
-                                                       for: indexPath) as? GalleryTableViewCell else { return UITableViewCell() }
+                                                       for: indexPath) as? FavouritesTableViewCell else { return UITableViewCell() }
         cell.viewModel = dataSource[indexPath.row]
         return cell
     }
@@ -80,7 +76,7 @@ extension GalleryViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate Implementation
 
-extension GalleryViewController: UITableViewDelegate {
+extension FavouritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.presenter.output.showPostDetails(post: dataSource[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: true)

@@ -13,12 +13,19 @@ class GalleryTableViewCell: UITableViewCell {
 
     @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var pictureHeight: NSLayoutConstraint!
+    @IBOutlet weak var favouriteIcon: UIButton!
     
     var viewModel: GalleryTableViewCellViewModel? {
         didSet {
             guard let viewModel = viewModel else { return }
             titleLabel.text = viewModel.title
-            pictureImageView = viewModel.image
+            pictureImageView.kf.setImage(with: viewModel.imageUrl)
+            if(viewModel.favourite) {
+                favouriteIcon.isHidden = false
+            } else {
+                favouriteIcon.isHidden = true
+            }
         }
     }
 }

@@ -1,18 +1,16 @@
 //
-//  GalleryTableViewCellModel.swift
+//  FavouritesTableViewCellModel.swift
 //  FlickrDemoClient
 //
-//  Created by Igor on 05/01/2019.
+//  Created by Рабочий on 10/01/2019.
 //  Copyright © 2019 Igor. All rights reserved.
 //
 
 import Foundation
-import UIKit
 
-protocol GalleryTableViewCellViewModel {
+protocol FavouritesTableViewCellViewModel {
     var title: String { get }
     var imageUrl: URL { get }
     var height: String { get }
     var width: String { get }
-    var favourite: Bool { get }
 }

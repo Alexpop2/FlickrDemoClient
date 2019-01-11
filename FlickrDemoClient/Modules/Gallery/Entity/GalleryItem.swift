@@ -12,18 +12,35 @@ import UIKit
 struct GalleryItem {
     var id: String
     var name: String
-    var picture: UIImageView?
+    var url: URL
+    var imgHeight: String
+    var imgWidth: String
+    var favouriteIcon: Bool
 }
 
 extension GalleryItem: GalleryTableViewCellViewModel {
+    var favourite: Bool {
+        return favouriteIcon
+    }
+    
+    var height: String {
+        return imgHeight
+    }
+    
+    var width: String {
+        return imgWidth
+    }
+    
+    var imageUrl: URL {
+        return url
+    }
+    
     var title: String {
         return name
     }
     
-    var image: UIImageView {
-        guard let picture = picture else { return UIImageView() }
-        return picture
-    }
-    
+}
+
+extension GalleryItem: FavouritesTableViewCellViewModel {
     
 }

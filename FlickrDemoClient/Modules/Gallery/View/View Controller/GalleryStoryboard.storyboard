@@ -13,13 +13,13 @@
         <!--Gallery-->
         <scene sceneID="f2u-QJ-Wgo">
             <objects>
-                <viewController id="AcD-K8-VzL" customClass="GalleryViewController" customModule="FlickrDemoClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GalleryViewControllerIdentifier" id="AcD-K8-VzL" customClass="GalleryViewController" customModule="FlickrDemoClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CmU-Sx-zQg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xTm-Kb-10V">
-                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="AcD-K8-VzL" id="tds-EM-AZS"/>
@@ -44,24 +44,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kQE-mG-HIu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6936.8000000000002" y="-842.42878560719646"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="9fa-oy-i6b">
-            <objects>
-                <navigationController storyboardIdentifier="GalleryNavigationControllerIdentifier" automaticallyAdjustsScrollViewInsets="NO" id="OFG-2y-ZkX" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="A8v-Dk-H1R">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="AcD-K8-VzL" kind="relationship" relationship="rootViewController" id="w0r-gC-7PA"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iFd-At-9Ra" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5997.6000000000004" y="-842.42878560719646"/>
         </scene>
     </scenes>
 </document>
