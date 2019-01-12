@@ -12,7 +12,7 @@ protocol GalleryPresenterInput: class {
     var viewInput: GalleryViewInput { get set }
     var interactorInput: GalleryInteractorInput { get set }
     var output: GalleryPresenterOutput { get set }
-    func updatePictures()
+    func loadPictures()
 }
 
 protocol GalleryPresenterOutput: class {

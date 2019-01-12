@@ -9,22 +9,22 @@
 import Foundation
 
 class FavouritesPresenter {
-    private weak var coordinator: FavouritesPresenterOutput!
+    private weak var presenterOutput: FavouritesPresenterOutput!
     private weak var view: FavouritesViewInput!
     private var interactor: FavouritesInteractorInput!
 }
 
 extension FavouritesPresenter: FavouritesPresenterInput {
-    func updatePictures() {
+    func loadPictures() {
         interactor.updateImages()
     }
     
     var output: FavouritesPresenterOutput {
         get {
-            return coordinator
+            return presenterOutput
         }
         set {
-            coordinator = newValue
+            presenterOutput = newValue
         }
     }
     

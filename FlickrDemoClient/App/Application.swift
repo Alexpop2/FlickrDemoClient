@@ -19,7 +19,7 @@ class Application {
 }
 
 extension Application {
-    func fire() -> UIViewController {
+    func loadRootVC() -> UIViewController {
         return modulesCoordinator.rootModuleController()
     }
 }

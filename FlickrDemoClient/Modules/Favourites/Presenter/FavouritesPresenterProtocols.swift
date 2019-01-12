@@ -12,7 +12,7 @@ protocol FavouritesPresenterInput: class {
     var output: FavouritesPresenterOutput { get set }
     var viewInput: FavouritesViewInput { get set }
     var interactorInput: FavouritesInteractorInput { get set }
-    func updatePictures()
+    func loadPictures()
 }
 
 protocol FavouritesPresenterOutput: class {

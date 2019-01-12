@@ -15,7 +15,7 @@ import Kingfisher
 class GalleryPresenter {
     private weak var view: GalleryViewInput!
     private var interactor: GalleryInteractorInput!
-    private weak var coordinator: GalleryPresenterOutput!
+    private weak var presenterOutput: GalleryPresenterOutput!
 }
 
 // MARK: - GalleryPresenterInput protocol implementation
@@ -23,10 +23,10 @@ class GalleryPresenter {
 extension GalleryPresenter: GalleryPresenterInput {
     var output: GalleryPresenterOutput {
         get {
-            return coordinator
+            return presenterOutput
         }
         set {
-            coordinator = newValue
+            presenterOutput = newValue
         }
     }
     
@@ -48,7 +48,7 @@ extension GalleryPresenter: GalleryPresenterInput {
         }
     }
     
-    func updatePictures() {
+    func loadPictures() {
         interactor.loadFavourites()
         interactor.updateImages()
     }
