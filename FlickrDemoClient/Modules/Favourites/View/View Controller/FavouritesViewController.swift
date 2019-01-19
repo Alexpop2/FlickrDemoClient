@@ -14,12 +14,12 @@ class FavouritesViewController: UIViewController {
     
     private let galleryTableViewCellNib = UINib(nibName: "FavouritesTableViewCell", bundle: nil)
     private let reusableCellIdentifier = "FavouritesCellReusableIdentyfier"
-    private var presenter: FavouritesPresenterInput!
+    private var output: FavouritesViewOutput!
     private var dataSource = [GalleryItem]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.loadPictures()
+        output.loadPictures()
         setUpUI()
     }
 }
@@ -27,12 +27,12 @@ class FavouritesViewController: UIViewController {
 // MARK: - GalleryViewInput protocol implementation
 
 extension FavouritesViewController: FavouritesViewInput {
-    var presenterInput: FavouritesPresenterInput {
+    var viewOutput: FavouritesViewOutput {
         get {
-            return presenter
+            return output
         }
         set {
-            presenter = newValue as! FavouritesPresenter
+            output = newValue
         }
     }
     
@@ -78,7 +78,7 @@ extension FavouritesViewController: UITableViewDataSource {
 
 extension FavouritesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.presenter.output.showPostDetails(post: dataSource[indexPath.row])
+        self.output.tableRowClick(post: dataSource[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

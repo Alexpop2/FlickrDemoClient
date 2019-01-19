@@ -9,13 +9,12 @@
 import Foundation
 
 protocol FavouritesPresenterInput: class {
-    var output: FavouritesPresenterOutput { get set }
+    var delegate: FavouritesPresenterDelegate { get set }
     var viewInput: FavouritesViewInput { get set }
     var interactorInput: FavouritesInteractorInput { get set }
-    func loadPictures()
 }
 
-protocol FavouritesPresenterOutput: class {
+protocol FavouritesPresenterDelegate: class {
     func showPostDetails(post: GalleryItem)
 }
 

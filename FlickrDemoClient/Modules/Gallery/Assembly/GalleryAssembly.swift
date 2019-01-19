@@ -21,7 +21,7 @@ class GalleryAssembly {
         let presenter = GalleryPresenter()
         let interactor = GalleryInteractor()
         
-        galleryVC.presenterInput = presenter
+        galleryVC.viewOutput = presenter
         presenter.interactorInput = interactor
         presenter.viewInput = galleryVC
         interactor.output = presenter

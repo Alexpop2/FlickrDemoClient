@@ -15,18 +15,18 @@ import Kingfisher
 class GalleryPresenter {
     private weak var view: GalleryViewInput!
     private var interactor: GalleryInteractorInput!
-    private weak var presenterOutput: GalleryPresenterOutput!
+    private weak var presenterDelegate: GalleryPresenterDelegate!
 }
 
 // MARK: - GalleryPresenterInput protocol implementation
 
 extension GalleryPresenter: GalleryPresenterInput {
-    var output: GalleryPresenterOutput {
+    var delegate: GalleryPresenterDelegate {
         get {
-            return presenterOutput
+            return presenterDelegate
         }
         set {
-            presenterOutput = newValue
+            presenterDelegate = newValue
         }
     }
     
@@ -46,6 +46,14 @@ extension GalleryPresenter: GalleryPresenterInput {
         set {
             interactor = newValue
         }
+    }
+}
+
+// MARK: - GalleryViewOutput protocol implementation
+
+extension GalleryPresenter: GalleryViewOutput {
+    func tableRowClick(post: GalleryItem) {
+        delegate.showPostDetails(post: post)
     }
     
     func loadPictures() {

@@ -9,6 +9,8 @@
 import UIKit
 
 class GalleryTabBarController: UITabBarController {
+    
+    weak var tabBarDelegate: GalleryTabBarDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,7 +18,9 @@ class GalleryTabBarController: UITabBarController {
         // Do any additional setup after loading the view.
     }
     
-
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        tabBarDelegate.tabClicked(tag: item.tag)
+    }
     /*
     // MARK: - Navigation
 

@@ -9,22 +9,19 @@
 import Foundation
 
 class FavouritesPresenter {
-    private weak var presenterOutput: FavouritesPresenterOutput!
+    private weak var presenterDelegate: FavouritesPresenterDelegate!
     private weak var view: FavouritesViewInput!
     private var interactor: FavouritesInteractorInput!
 }
 
 extension FavouritesPresenter: FavouritesPresenterInput {
-    func loadPictures() {
-        interactor.updateImages()
-    }
     
-    var output: FavouritesPresenterOutput {
+    var delegate: FavouritesPresenterDelegate {
         get {
-            return presenterOutput
+            return presenterDelegate
         }
         set {
-            presenterOutput = newValue
+            presenterDelegate = newValue
         }
     }
     
@@ -45,8 +42,16 @@ extension FavouritesPresenter: FavouritesPresenterInput {
             interactor = newValue
         }
     }
+}
+
+extension FavouritesPresenter: FavouritesViewOutput {
+    func loadPictures() {
+        interactor.updateImages()
+    }
     
-    
+    func tableRowClick(post: GalleryItem) {
+        delegate.showPostDetails(post: post)
+    }
 }
 
 extension FavouritesPresenter: FavouritesInteractorOutput {
