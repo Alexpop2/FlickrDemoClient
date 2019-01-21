@@ -21,7 +21,7 @@ class PhotoInfoAssembly {
         let presenter = PhotoInfoPresenter()
         let interactor = PhotoInfoInteractor()
         
-        galleryVC.presenterInput = presenter
+        galleryVC.viewOutput = presenter
         presenter.interactorInput = interactor
         presenter.viewInput = galleryVC
         interactor.output = presenter

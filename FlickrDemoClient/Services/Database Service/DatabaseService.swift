@@ -15,14 +15,8 @@ class DatabaseService: DatabaseServiceInput {
         let postEntities = realm.objects(PostEntity.self)
         //let postEntities = realm.objects(PostEntity.self).filter("id = '43055984340'")
         var postEntitiesArray = [PostEntity]()
-        for entity in postEntities {
-            let postEntity = PostEntity()
-            postEntity.id = entity.id
-            postEntity.title = entity.title
-            postEntity.imgHeight = entity.imgHeight
-            postEntity.imgWidth = entity.imgWidth
-            postEntity.url = entity.url
-            postEntitiesArray.append(postEntity)
+        for entity in postEntities { //map
+            postEntitiesArray.append(entity)
         }
         return postEntitiesArray
     }

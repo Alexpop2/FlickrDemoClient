@@ -16,15 +16,15 @@ class PhotoInfoViewController: UIViewController {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var imgHeight: NSLayoutConstraint!
     
-    private var presenter: PhotoInfoPresenterInput!
+    private var output: PhotoInfoViewOutput!
     
     @IBAction func likeButtonPressed(_ sender: UIButton) {
-        presenter.favouriteButtonClick()
+        output.favouriteButtonClick()
     }
  
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.updatePhotoInfo()
+        output.loadPhotoInfo()
     }
 }
 
@@ -47,12 +47,12 @@ extension PhotoInfoViewController: PhotoInfoViewInput {
         photoImageView.kf.setImage(with: image)
     }
     
-    var presenterInput: PhotoInfoPresenterInput {
+    var viewOutput: PhotoInfoViewOutput {
         get {
-            return presenter
+            return output
         }
         set {
-            presenter = newValue
+            output = newValue
         }
     }
 }

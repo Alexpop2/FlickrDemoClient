@@ -21,7 +21,7 @@ class FavouritesAssembly {
         let presenter = FavouritesPresenter()
         let interactor = FavouritesInteractor()
         
-        galleryVC.presenterInput = presenter
+        galleryVC.viewOutput = presenter
         presenter.interactorInput = interactor
         presenter.viewInput = galleryVC
         interactor.output = presenter

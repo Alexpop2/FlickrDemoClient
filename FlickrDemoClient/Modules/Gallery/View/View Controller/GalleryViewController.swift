@@ -18,12 +18,12 @@ class GalleryViewController: UIViewController {
     
     private let galleryTableViewCellNib = UINib(nibName: "GalleryTableViewCell", bundle: nil)
     private let reusableCellIdentifier = "GalleryCellReusableIdentyfier"
-    private var presenter: GalleryPresenterInput!
+    private var output: GalleryViewOutput!
     private var dataSource = [GalleryItem]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.loadPictures()
+        output.loadPictures()
         setUpUI()
     }
 }
@@ -31,12 +31,12 @@ class GalleryViewController: UIViewController {
 // MARK: - GalleryViewInput protocol implementation
 
 extension GalleryViewController: GalleryViewInput {
-    var presenterInput: GalleryPresenterInput {
+    var viewOutput: GalleryViewOutput {
         get {
-            return presenter
+            return output
         }
         set {
-            presenter = newValue as! GalleryPresenter
+            output = newValue
         }
     }
     
@@ -82,7 +82,7 @@ extension GalleryViewController: UITableViewDataSource {
 
 extension GalleryViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.presenter.output.showPostDetails(post: dataSource[indexPath.row])
+        self.output.tableRowClick(post: dataSource[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

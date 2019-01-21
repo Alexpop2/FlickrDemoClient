@@ -9,8 +9,13 @@
 import Foundation
 
 protocol PhotoInfoViewInput: class {
-    var presenterInput: PhotoInfoPresenterInput { get set }
+    var viewOutput: PhotoInfoViewOutput { get set }
     func set(title: String)
     func set(image: URL, imgHeight: String, imgWidth: String)
     func setFavouriteIcon(flag: Bool)
+}
+
+protocol PhotoInfoViewOutput: class {
+    func loadPhotoInfo()
+    func favouriteButtonClick()
 }

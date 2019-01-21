@@ -11,27 +11,18 @@ import Foundation
 class PhotoInfoPresenter {
     private weak var view: PhotoInfoViewInput!
     private var interactor: PhotoInfoInteractorInput!
-    private var presenterOutput: PhotoInfoPresenterOutput!
+    private var presenterDelegate: PhotoInfoPresenterDelegate!
 }
 
 extension PhotoInfoPresenter: PhotoInfoPresenterInput {
-    func favouriteButtonClick() {
-        interactor.favouriteButtonClick()
-    }
-    
-    var output: PhotoInfoPresenterOutput {
+    var delegate: PhotoInfoPresenterDelegate {
         get {
-            return presenterOutput
+            return presenterDelegate
         }
         set {
-            presenterOutput = newValue
+            presenterDelegate = newValue
         }
     }
-    
-    func updatePhotoInfo() {
-        interactor.updatePhotoInfo()
-    }
-    
     var viewInput: PhotoInfoViewInput {
         get {
             return view
@@ -51,10 +42,19 @@ extension PhotoInfoPresenter: PhotoInfoPresenterInput {
     }
 }
 
+extension PhotoInfoPresenter: PhotoInfoViewOutput {
+    func loadPhotoInfo() {
+        interactor.updatePhotoInfo()
+    }
+    func favouriteButtonClick() {
+        interactor.favouriteButtonClick()
+    }
+}
+
 extension PhotoInfoPresenter: PhotoInfoInteractorOutput {
     func updateFavourite(id: String, favourite: Bool) {
         view.setFavouriteIcon(flag: favourite)
-        presenterOutput.updateFavourite(id: id, favourite: favourite)
+        presenterDelegate.updateFavourite(id: id, favourite: favourite)
     }
     
     func setPhotoInfo(title: String, url: URL, imgHeight: String, imgWidth: String, favourite: Bool) {

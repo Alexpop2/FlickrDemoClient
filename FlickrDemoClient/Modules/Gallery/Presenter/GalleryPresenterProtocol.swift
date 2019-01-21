@@ -11,10 +11,9 @@ import Foundation
 protocol GalleryPresenterInput: class {
     var viewInput: GalleryViewInput { get set }
     var interactorInput: GalleryInteractorInput { get set }
-    var output: GalleryPresenterOutput { get set }
-    func loadPictures()
+    var delegate: GalleryPresenterDelegate { get set }
 }
 
-protocol GalleryPresenterOutput: class {
+protocol GalleryPresenterDelegate: class {
     func showPostDetails(post: GalleryItem)
 }

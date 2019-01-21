@@ -9,6 +9,11 @@
 import Foundation
 
 protocol GalleryViewInput: class {
-    var presenterInput: GalleryPresenterInput { get set }
+    var viewOutput: GalleryViewOutput { get set }
     func display(galleryItems: [GalleryItem])
+}
+
+protocol GalleryViewOutput: class {
+    func loadPictures()
+    func tableRowClick(post: GalleryItem)
 }

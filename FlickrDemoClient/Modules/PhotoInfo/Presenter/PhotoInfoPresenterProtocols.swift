@@ -11,11 +11,9 @@ import Foundation
 protocol PhotoInfoPresenterInput: class {
     var viewInput: PhotoInfoViewInput { get set }
     var interactorInput: PhotoInfoInteractorInput { get set }
-    var output: PhotoInfoPresenterOutput { get set }
-    func updatePhotoInfo()
-    func favouriteButtonClick()
+    var delegate: PhotoInfoPresenterDelegate { get set }
 }
 
-protocol PhotoInfoPresenterOutput: class {
+protocol PhotoInfoPresenterDelegate: class {
     func updateFavourite(id: String, favourite: Bool)
 }

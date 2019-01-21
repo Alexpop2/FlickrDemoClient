@@ -9,6 +9,11 @@
 import Foundation
 
 protocol FavouritesViewInput: class {
-    var presenterInput: FavouritesPresenterInput { get set }
+    var viewOutput: FavouritesViewOutput { get set }
     func display(galleryItems: [GalleryItem])
+}
+
+protocol FavouritesViewOutput: class {
+    func loadPictures()
+    func tableRowClick(post: GalleryItem)
 }
