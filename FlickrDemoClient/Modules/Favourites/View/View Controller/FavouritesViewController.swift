@@ -38,7 +38,9 @@ extension FavouritesViewController: FavouritesViewInput {
     
     func display(galleryItems: [GalleryItem]) {
         dataSource = galleryItems
-        tableView.reloadData()
+        if(tableView != nil) {
+            tableView.reloadData()
+        }
     }
 }
 

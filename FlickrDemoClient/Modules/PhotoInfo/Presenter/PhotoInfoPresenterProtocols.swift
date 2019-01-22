@@ -12,6 +12,8 @@ protocol PhotoInfoPresenterInput: class {
     var viewInput: PhotoInfoViewInput { get set }
     var interactorInput: PhotoInfoInteractorInput { get set }
     var delegate: PhotoInfoPresenterDelegate { get set }
+    
+    func setGalleryItem(item: GalleryItem)
 }
 
 protocol PhotoInfoPresenterDelegate: class {

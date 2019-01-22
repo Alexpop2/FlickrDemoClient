@@ -17,86 +17,72 @@ enum Presenters: Int {
 
 class ModulesCoordinator {
     
-    private let internetService: InternetServiceInput
-    private let database: DatabaseServiceInput
     private var navigationController: UINavigationController
-    private var tabBarController: GalleryTabBarController
+    private var tabBarController: UITabBarController
     private var viewControllers: [UIViewController]
-    private var presenters: [Any]
-    
-    private var currentPresenter: Int!
-    
-    private var favouritesFirstRun = false
+    private var presenters: [MainPresenter]
+    private var modulesCreator: ModulesCreator
     
     func rootModuleController() -> UIViewController {
-        let galleryAssembly = GalleryAssembly()
-        guard let gallery = galleryAssembly.build(internetService: internetService,
-                                                  database: database)
-            else { return UIViewController() }
-        presenters.append(gallery.presenter)
-        gallery.presenter.delegate = self
-        gallery.controller.tabBarItem = UITabBarItem(tabBarSystemItem: .recents, tag: Presenters.galleryPresenter.rawValue)
-        viewControllers.append(gallery.controller)
+        modulesCreator.createModule(assembly: GalleryAssembly(),
+                                    presenterType: GalleryPresenterInput.self,
+                                    tabBarSystemItem: .recents,
+                                    tag: Presenters.galleryPresenter.rawValue)?.delegate = self
         
-        let favouritesAssembly = FavouritesAssembly()
-        guard let favourites = favouritesAssembly.build(internetService: internetService,
-                                                        database: database)
-            else { return UIViewController() }
-        presenters.append(favourites.presenter)
-        favourites.presenter.delegate = self
-        favourites.controller.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: Presenters.favouritePresenter.rawValue)
-        viewControllers.append(favourites.controller)
+        modulesCreator.createModule(assembly: FavouritesAssembly(),
+                                    presenterType: FavouritesPresenterInput.self,
+                                    tabBarSystemItem: .favorites,
+                                    tag: Presenters.favouritePresenter.rawValue)?.delegate = self
         
         tabBarController.viewControllers = viewControllers
-        currentPresenter = Presenters.galleryPresenter.rawValue
         
         return navigationController
     }
     
     init(internetService: InternetServiceInput, database: DatabaseServiceInput) {
-        self.internetService = internetService
-        self.database = database
-        self.tabBarController = GalleryTabBarController()
+        self.tabBarController = UITabBarController()
         self.navigationController = UINavigationController(rootViewController: tabBarController)
         navigationController.navigationBar.prefersLargeTitles = true
         viewControllers = [UIViewController]()
-        presenters = [Any]()
-        tabBarController.tabBarDelegate = self
+        presenters = [MainPresenter]()
+        modulesCreator = ModulesCreator(internetService: internetService, database: database)
+        modulesCreator.delegate = self
     }
 }
 
 extension ModulesCoordinator: GalleryPresenterDelegate {
     func showPostDetails(post: GalleryItem) {
-        let photoInfoAssembly = PhotoInfoAssembly()
-        guard let photoInfo = photoInfoAssembly.build(internetService: internetService,
-                                                      database: database)
-            else { return }
-        photoInfo.presenter.delegate = self
-        photoInfo.presenter.interactorInput.galleryItem = post
-        navigationController.pushViewController(photoInfo.controller, animated: true)
+        if(presenters.indices.contains(Presenters.photoInfoPresenter.rawValue)) {
+            presenters.remove(at: Presenters.photoInfoPresenter.rawValue)
+            viewControllers[Presenters.photoInfoPresenter.rawValue].dismiss(animated: false, completion: nil)
+            viewControllers.remove(at: Presenters.photoInfoPresenter.rawValue)
+        }
+
+        modulesCreator.createModule(assembly: PhotoInfoAssembly(),
+                                    presenterType: PhotoInfoPresenterInput.self,
+                                    tabBarSystemItem: nil,
+                                    tag: Presenters.photoInfoPresenter.rawValue)?.delegate = self
+        
+        (presenters[Presenters.photoInfoPresenter.rawValue] as! PhotoInfoPresenterInput).setGalleryItem(item: post)
+        navigationController.pushViewController(viewControllers[Presenters.photoInfoPresenter.rawValue], animated: true)
     }
 }
 
 extension ModulesCoordinator: PhotoInfoPresenterDelegate {
     func updateFavourite(id: String, favourite: Bool) {
-        (presenters[Presenters.galleryPresenter.rawValue] as! GalleryPresenterInput).interactorInput.operateWithFavourite(id: id,
-                                                                                                                          status: favourite)
-        if(favouritesFirstRun) {
-            (presenters[Presenters.favouritePresenter.rawValue] as! FavouritesPresenterInput)
-                .interactorInput.operateWithFavourite(id: id,
-                                                      status: favourite)
-        }
+        (presenters[Presenters.galleryPresenter.rawValue] as! GalleryPresenterInput).operateWithFavourite(id: id, status: favourite)
+        (presenters[Presenters.favouritePresenter.rawValue] as! FavouritesPresenterInput).operateWithFavourite(id: id, status: favourite)
     }
 }
 
-extension ModulesCoordinator: FavouritesPresenterDelegate {
-    
-}
+extension ModulesCoordinator: FavouritesPresenterDelegate {}
 
-extension ModulesCoordinator: GalleryTabBarDelegate {
-    func tabClicked(tag: Int) {
-        if(tag == Presenters.favouritePresenter.rawValue) {
-            favouritesFirstRun = true
-        }
+extension ModulesCoordinator: ModulesCreatorDelegate {
+    func add(presenter: MainPresenter) {
+        presenters.append(presenter)
+    }
+    
+    func add(controller: UIViewController) {
+        viewControllers.append(controller)
     }
 }

@@ -10,6 +10,7 @@ import Foundation
 
 protocol FavouritesInteractorInput: class {
     var output: FavouritesInteractorOutput { get set }
+    
     func updateImages()
     func addFavouritesToDB(items: [PostEntity])
     func operateWithFavourite(id: String, status: Bool)

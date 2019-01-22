@@ -15,6 +15,10 @@ class PhotoInfoPresenter {
 }
 
 extension PhotoInfoPresenter: PhotoInfoPresenterInput {
+    func setGalleryItem(item: GalleryItem) {
+        interactor.setGalleryItem(item: item)
+    }
+    
     var delegate: PhotoInfoPresenterDelegate {
         get {
             return presenterDelegate
@@ -63,3 +67,5 @@ extension PhotoInfoPresenter: PhotoInfoInteractorOutput {
         view.setFavouriteIcon(flag: favourite)
     }
 }
+
+extension PhotoInfoPresenter: MainPresenter {}

@@ -15,6 +15,9 @@ class FavouritesPresenter {
 }
 
 extension FavouritesPresenter: FavouritesPresenterInput {
+    func operateWithFavourite(id: String, status: Bool) {
+        interactor.operateWithFavourite(id: id, status: status)
+    }
     
     var delegate: FavouritesPresenterDelegate {
         get {
@@ -73,3 +76,5 @@ extension FavouritesPresenter: FavouritesInteractorOutput {
         view.display(galleryItems: items)
     }
 }
+
+extension FavouritesPresenter: MainPresenter {}

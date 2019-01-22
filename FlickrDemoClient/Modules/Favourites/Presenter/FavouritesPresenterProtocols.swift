@@ -12,6 +12,8 @@ protocol FavouritesPresenterInput: class {
     var delegate: FavouritesPresenterDelegate { get set }
     var viewInput: FavouritesViewInput { get set }
     var interactorInput: FavouritesInteractorInput { get set }
+    
+    func operateWithFavourite(id: String, status: Bool)
 }
 
 protocol FavouritesPresenterDelegate: class {

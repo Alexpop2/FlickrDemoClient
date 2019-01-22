@@ -12,6 +12,8 @@ protocol GalleryPresenterInput: class {
     var viewInput: GalleryViewInput { get set }
     var interactorInput: GalleryInteractorInput { get set }
     var delegate: GalleryPresenterDelegate { get set }
+    
+    func operateWithFavourite(id: String, status: Bool)
 }
 
 protocol GalleryPresenterDelegate: class {

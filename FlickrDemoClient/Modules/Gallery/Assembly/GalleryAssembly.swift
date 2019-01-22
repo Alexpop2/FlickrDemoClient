@@ -9,9 +9,11 @@
 import Foundation
 import UIKit
 
-class GalleryAssembly {
+class GalleryAssembly {}
+
+extension GalleryAssembly: MainAssembly {
     func build(internetService: InternetServiceInput,
-               database: DatabaseServiceInput) -> (controller: UIViewController, presenter: GalleryPresenterInput)? {
+               database: DatabaseServiceInput) -> (controller: UIViewController, presenter: MainPresenter)? {
         let storyboard = UIStoryboard(name: "GalleryStoryboard", bundle: nil)
         let rootVC = storyboard.instantiateViewController(withIdentifier: "GalleryViewControllerIdentifier")
         guard let galleryVC = rootVC as? GalleryViewController else {

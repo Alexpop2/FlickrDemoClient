@@ -21,6 +21,10 @@ class GalleryPresenter {
 // MARK: - GalleryPresenterInput protocol implementation
 
 extension GalleryPresenter: GalleryPresenterInput {
+    func operateWithFavourite(id: String, status: Bool) {
+        interactor.operateWithFavourite(id: id, status: status)
+    }
+    
     var delegate: GalleryPresenterDelegate {
         get {
             return presenterDelegate
@@ -95,3 +99,5 @@ extension GalleryPresenter: GalleryInteractorOutput {
         view.display(galleryItems: outArray)
     }
 }
+
+extension GalleryPresenter: MainPresenter {}

@@ -16,6 +16,11 @@ class PhotoInfoInteractor {
 }
 
 extension PhotoInfoInteractor: PhotoInfoInteractorInput {
+    func setGalleryItem(item: GalleryItem) {
+        self.item = item
+        //updatePhotoInfo()
+    }
+    
     func favouriteButtonClick() {
         let postEntity = PostEntity()
         postEntity.id = item.id

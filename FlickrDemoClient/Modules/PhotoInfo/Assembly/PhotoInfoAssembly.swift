@@ -9,9 +9,11 @@
 import Foundation
 import UIKit
 
-class PhotoInfoAssembly {
+class PhotoInfoAssembly {}
+
+extension PhotoInfoAssembly: MainAssembly {
     func build(internetService: InternetServiceInput,
-               database: DatabaseServiceInput) -> (controller: UIViewController, presenter: PhotoInfoPresenterInput)? {
+               database: DatabaseServiceInput) -> (controller: UIViewController, presenter: MainPresenter)? {
         let storyboard = UIStoryboard(name: "PhotoInfoStoryboard", bundle: nil)
         let rootVC = storyboard.instantiateViewController(withIdentifier: "PhotoInfoViewControllerIdentifier")
         guard let galleryVC = rootVC as? PhotoInfoViewController else {
