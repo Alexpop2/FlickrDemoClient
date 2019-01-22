@@ -24,15 +24,15 @@ class ModulesCoordinator {
     private var modulesCreator: ModulesCreator
     
     func rootModuleController() -> UIViewController {
-        modulesCreator.createModule(assembly: GalleryAssembly(),
-                                    presenterType: GalleryPresenterInput.self,
-                                    tabBarSystemItem: .recents,
-                                    tag: Presenters.galleryPresenter.rawValue)?.delegate = self
+        modulesCreator.create(assembly: GalleryAssembly(),
+                              presenterType: GalleryPresenterInput.self,
+                              tabBarSystemItem: .recents,
+                              tag: Presenters.galleryPresenter.rawValue)?.delegate = self
         
-        modulesCreator.createModule(assembly: FavouritesAssembly(),
-                                    presenterType: FavouritesPresenterInput.self,
-                                    tabBarSystemItem: .favorites,
-                                    tag: Presenters.favouritePresenter.rawValue)?.delegate = self
+        modulesCreator.create(assembly: FavouritesAssembly(),
+                              presenterType: FavouritesPresenterInput.self,
+                              tabBarSystemItem: .favorites,
+                              tag: Presenters.favouritePresenter.rawValue)?.delegate = self
         
         tabBarController.viewControllers = viewControllers
         
@@ -58,10 +58,10 @@ extension ModulesCoordinator: GalleryPresenterDelegate {
             viewControllers.remove(at: Presenters.photoInfoPresenter.rawValue)
         }
 
-        modulesCreator.createModule(assembly: PhotoInfoAssembly(),
-                                    presenterType: PhotoInfoPresenterInput.self,
-                                    tabBarSystemItem: nil,
-                                    tag: Presenters.photoInfoPresenter.rawValue)?.delegate = self
+        modulesCreator.create(assembly: PhotoInfoAssembly(),
+                              presenterType: PhotoInfoPresenterInput.self,
+                              tabBarSystemItem: nil,
+                              tag: Presenters.photoInfoPresenter.rawValue)?.delegate = self
         
         (presenters[Presenters.photoInfoPresenter.rawValue] as! PhotoInfoPresenterInput).setGalleryItem(item: post)
         navigationController.pushViewController(viewControllers[Presenters.photoInfoPresenter.rawValue], animated: true)

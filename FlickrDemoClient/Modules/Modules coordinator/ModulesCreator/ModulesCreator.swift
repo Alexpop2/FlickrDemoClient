@@ -15,7 +15,7 @@ class ModulesCreator {
     
     weak var delegate: ModulesCreatorDelegate!
     
-    func createModule<T>(assembly: MainAssembly, presenterType: T.Type, tabBarSystemItem: UITabBarItem.SystemItem?, tag: Int) -> T? {
+    func create<T>(assembly: MainAssembly, presenterType: T.Type, tabBarSystemItem: UITabBarItem.SystemItem?, tag: Int) -> T? {
         guard let module = assembly.build(internetService: internetService,
                                           database: database)
             else { return nil }
