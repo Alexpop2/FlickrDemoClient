@@ -9,11 +9,9 @@
 import Foundation
 import UIKit
 
-class FavouritesAssembly {}
-
-extension FavouritesAssembly: MainAssembly {
+class FavouritesAssembly {
     func build(internetService: InternetServiceInput,
-               database: DatabaseServiceInput) -> (controller: UIViewController, presenter: MainPresenter)? {
+               database: DatabaseServiceInput) -> (controller: UIViewController, presenter: FavouritesPresenter)? {
         let storyboard = UIStoryboard(name: "FavouritesStoryboard", bundle: nil)
         let rootVC = storyboard.instantiateViewController(withIdentifier: "FavouritesViewControllerIdentifier")
         guard let galleryVC = rootVC as? FavouritesViewController else {

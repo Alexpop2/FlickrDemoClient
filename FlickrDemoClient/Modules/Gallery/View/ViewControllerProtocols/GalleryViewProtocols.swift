@@ -17,3 +17,7 @@ protocol GalleryViewOutput: class {
     func loadPictures()
     func tableRowClick(post: GalleryItem)
 }
+
+protocol RoutingGalleryView: class {
+    func presentGalleryView()
+}

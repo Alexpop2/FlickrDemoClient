@@ -18,7 +18,7 @@ class PhotoInfoInteractor {
 extension PhotoInfoInteractor: PhotoInfoInteractorInput {
     func setGalleryItem(item: GalleryItem) {
         self.item = item
-        //updatePhotoInfo()
+        updatePhotoInfo()
     }
     
     func favouriteButtonClick() {

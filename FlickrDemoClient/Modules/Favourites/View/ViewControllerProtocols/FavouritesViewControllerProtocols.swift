@@ -17,3 +17,7 @@ protocol FavouritesViewOutput: class {
     func loadPictures()
     func tableRowClick(post: GalleryItem)
 }
+
+protocol RoutingFavouritesView: class {
+    func presentFavouritesView()
+}

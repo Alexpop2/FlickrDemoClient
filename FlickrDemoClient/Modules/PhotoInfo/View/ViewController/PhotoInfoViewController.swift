@@ -30,21 +30,27 @@ class PhotoInfoViewController: UIViewController {
 
 extension PhotoInfoViewController: PhotoInfoViewInput {
     func setFavouriteIcon(flag: Bool) {
-        var buttonImage = #imageLiteral(resourceName: "baseline_favorite_border_black_36pt")
-        if(flag) {
-            buttonImage = #imageLiteral(resourceName: "baseline_favorite_black_36pt")
+        if(isViewLoaded) {
+            var buttonImage = #imageLiteral(resourceName: "baseline_favorite_border_black_36pt")
+            if(flag) {
+                buttonImage = #imageLiteral(resourceName: "baseline_favorite_black_36pt")
+            }
+            likeButton.setImage(buttonImage, for: .normal)
         }
-        likeButton.setImage(buttonImage, for: .normal)
     }
     
     func set(title: String) {
-        titleLabel.text = title
+        if(isViewLoaded) {
+            titleLabel.text = title
+        }
     }
     
     func set(image: URL, imgHeight: String, imgWidth: String) {
-        let height = CGFloat(((Float(imgHeight) ?? 1) / (Float(imgWidth) ?? 1))) * UIScreen.main.bounds.width
-        self.imgHeight.constant = height
-        photoImageView.kf.setImage(with: image)
+        if(isViewLoaded) {
+            let height = CGFloat(((Float(imgHeight) ?? 1) / (Float(imgWidth) ?? 1))) * UIScreen.main.bounds.width
+            self.imgHeight.constant = height
+            photoImageView.kf.setImage(with: image)
+        }
     }
     
     var viewOutput: PhotoInfoViewOutput {

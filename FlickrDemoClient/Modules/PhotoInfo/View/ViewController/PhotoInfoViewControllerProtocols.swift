@@ -19,3 +19,7 @@ protocol PhotoInfoViewOutput: class {
     func loadPhotoInfo()
     func favouriteButtonClick()
 }
+
+protocol RoutingPhotoInfoView: class {
+    func presentPhotoInfoView()
+}

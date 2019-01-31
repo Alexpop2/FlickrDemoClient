@@ -19,70 +19,117 @@ class ModulesCoordinator {
     
     private var navigationController: UINavigationController
     private var tabBarController: UITabBarController
-    private var viewControllers: [UIViewController]
-    private var presenters: [MainPresenter]
-    private var modulesCreator: ModulesCreator
+    
+    lazy private var controllerPackageBuilder: ControllerPackageBuilderProtocol = ControllerPackageBuilder(modulesCoordinator: self)
+    private var presenterArray : [MainPresenter] = []
+    private var viewControllers : [UIViewController] = []
+    
+    init() {
+        self.tabBarController = UITabBarController()
+        self.navigationController = UINavigationController(rootViewController: tabBarController)
+        navigationController.navigationBar.prefersLargeTitles = true
+    }
     
     func rootModuleController() -> UIViewController {
-        modulesCreator.create(assembly: GalleryAssembly(),
-                              presenterType: GalleryPresenterInput.self,
-                              tabBarSystemItem: .recents,
-                              tag: Presenters.galleryPresenter.rawValue)?.delegate = self
-        
-        modulesCreator.create(assembly: FavouritesAssembly(),
-                              presenterType: FavouritesPresenterInput.self,
-                              tabBarSystemItem: .favorites,
-                              tag: Presenters.favouritePresenter.rawValue)?.delegate = self
+        presentGalleryView()
+        presentFavouritesView()
         
         tabBarController.viewControllers = viewControllers
         
         return navigationController
     }
     
-    init(internetService: InternetServiceInput, database: DatabaseServiceInput) {
-        self.tabBarController = UITabBarController()
-        self.navigationController = UINavigationController(rootViewController: tabBarController)
-        navigationController.navigationBar.prefersLargeTitles = true
-        viewControllers = [UIViewController]()
-        presenters = [MainPresenter]()
-        modulesCreator = ModulesCreator(internetService: internetService, database: database)
-        modulesCreator.delegate = self
+    private func removeFromPresenterArray<T>(_ : T.Type){
+        for i in 0..<presenterArray.count {
+            guard presenterArray[i] is (T) else {continue}
+            presenterArray.remove(at: i)
+        }
     }
+    
+    private func findPresenter<T>(_: T.Type) -> (T?){
+        var presenter:(T)?
+        for i in 0..<presenterArray.count {
+            guard let find = presenterArray[i] as? (T) else { continue}
+            presenter = find
+        }
+        return presenter
+    }
+    
+    private func findViewController<T>(_: T.Type) -> (T?){
+        var controller:(T)?
+        for i in 0..<viewControllers.count {
+            guard let find = viewControllers[i] as? (T) else { continue}
+            controller = find
+        }
+        return controller
+    }
+    
+    private func presentController<T>(type: T.Type, push: Bool){
+        guard let controllerPackage = controllerPackageBuilder.createPackage(type: type) else {return}
+        presenterArray.append(controllerPackage.presenter)
+        viewControllers.append(controllerPackage.controller)
+        if(push) {
+            navigationController.pushViewController(controllerPackage.controller, animated: true)
+        }
+    }
+    
+    private func presentController(controller: UIViewController) {
+        navigationController.pushViewController(controller, animated: true)
+    }
+    
 }
 
 extension ModulesCoordinator: GalleryPresenterDelegate {
     func showPostDetails(post: GalleryItem) {
-        if(presenters.indices.contains(Presenters.photoInfoPresenter.rawValue)) {
-            presenters.remove(at: Presenters.photoInfoPresenter.rawValue)
-            viewControllers[Presenters.photoInfoPresenter.rawValue].dismiss(animated: false, completion: nil)
-            viewControllers.remove(at: Presenters.photoInfoPresenter.rawValue)
-        }
-
-        modulesCreator.create(assembly: PhotoInfoAssembly(),
-                              presenterType: PhotoInfoPresenterInput.self,
-                              tabBarSystemItem: nil,
-                              tag: Presenters.photoInfoPresenter.rawValue)?.delegate = self
-        
-        (presenters[Presenters.photoInfoPresenter.rawValue] as! PhotoInfoPresenterInput).setGalleryItem(item: post)
-        navigationController.pushViewController(viewControllers[Presenters.photoInfoPresenter.rawValue], animated: true)
+        presentPhotoInfoView()
+        guard let photoInfoPresenter = findPresenter(PhotoInfoPresenterInput.self) else {return}
+        photoInfoPresenter.setGalleryItem(item: post)
     }
 }
 
 extension ModulesCoordinator: PhotoInfoPresenterDelegate {
     func updateFavourite(id: String, favourite: Bool) {
-        (presenters[Presenters.galleryPresenter.rawValue] as! GalleryPresenterInput).operateWithFavourite(id: id, status: favourite)
-        (presenters[Presenters.favouritePresenter.rawValue] as! FavouritesPresenterInput).operateWithFavourite(id: id, status: favourite)
+        let galleryPresenter = findPresenter(GalleryPresenterInput.self)
+        let favouritesPresenter = findPresenter(FavouritesPresenterInput.self)
+        if(galleryPresenter != nil) {
+            galleryPresenter!.operateWithFavourite(id: id, status: favourite)
+        }
+        if(favouritesPresenter != nil) {
+            favouritesPresenter!.operateWithFavourite(id: id, status: favourite)
+        }
     }
 }
 
 extension ModulesCoordinator: FavouritesPresenterDelegate {}
 
-extension ModulesCoordinator: ModulesCreatorDelegate {
-    func add(presenter: MainPresenter) {
-        presenters.append(presenter)
+//MARK: - Impementation routing protocols
+
+extension ModulesCoordinator : RoutingGalleryView {
+    func presentGalleryView() {
+        guard let galleryViewController = findViewController(GalleryViewController.self) else {
+            presentController(type: GalleryViewController.self, push: false)
+            return
+        }
+        presentController(controller: galleryViewController)
     }
-    
-    func add(controller: UIViewController) {
-        viewControllers.append(controller)
+}
+
+extension ModulesCoordinator : RoutingPhotoInfoView {
+    func presentPhotoInfoView() {
+        guard let photoInfoViewController = findViewController(PhotoInfoViewController.self) else {
+            presentController(type: PhotoInfoViewController.self, push: true)
+            return
+        }
+        presentController(controller: photoInfoViewController)
+    }
+}
+
+extension ModulesCoordinator : RoutingFavouritesView {
+    func presentFavouritesView() {
+        guard let favouritesViewController = findViewController(FavouritesViewController.self) else {
+            presentController(type: FavouritesViewController.self, push: false)
+            return
+        }
+        presentController(controller: favouritesViewController)
     }
 }
