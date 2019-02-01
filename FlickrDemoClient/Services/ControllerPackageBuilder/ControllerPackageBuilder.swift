@@ -22,7 +22,8 @@ class ControllerPackageBuilder: ControllerPackageBuilderProtocol {
     private let internetService: InternetServiceInput = InternetService()
     private let database: DatabaseServiceInput = DatabaseService()
     private let modulesCoordinator : ModulesCoordinator
-
+    
+    private var viewControllers : [UIViewController] = []
     
     init(modulesCoordinator: ModulesCoordinator){
         self.modulesCoordinator = modulesCoordinator
@@ -40,13 +41,6 @@ class ControllerPackageBuilder: ControllerPackageBuilderProtocol {
             return createFavoritesController()
         }
     }
-    
-//    func getViewController(controller: ViewControllers) {
-//        switch controller {
-//        case .gallery:
-//
-//        }
-//    }
 }
 
 extension ControllerPackageBuilder {
