@@ -9,6 +9,6 @@
 import Foundation
 
 protocol ControllerPackageBuilderProtocol: class {
-    func createPackage<T>(type: T.Type )->(ControllerPackageProtocol?)
+    func createPackage(type: ViewControllers )->(ControllerPackageProtocol?)
 }
 

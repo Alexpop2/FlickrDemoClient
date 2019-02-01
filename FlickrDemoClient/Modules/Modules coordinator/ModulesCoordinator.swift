@@ -64,7 +64,7 @@ class ModulesCoordinator {
         return controller
     }
     
-    private func presentController<T>(type: T.Type, push: Bool){
+    private func presentController(type: ViewControllers, push: Bool){
         guard let controllerPackage = controllerPackageBuilder.createPackage(type: type) else {return}
         presenterArray.append(controllerPackage.presenter)
         viewControllers.append(controllerPackage.controller)
@@ -107,7 +107,7 @@ extension ModulesCoordinator: FavouritesPresenterDelegate {}
 extension ModulesCoordinator : RoutingGalleryView {
     func presentGalleryView() {
         guard let galleryViewController = findViewController(GalleryViewController.self) else {
-            presentController(type: GalleryViewController.self, push: false)
+            presentController(type: .gallery, push: false)
             return
         }
         presentController(controller: galleryViewController)
@@ -117,7 +117,7 @@ extension ModulesCoordinator : RoutingGalleryView {
 extension ModulesCoordinator : RoutingPhotoInfoView {
     func presentPhotoInfoView() {
         guard let photoInfoViewController = findViewController(PhotoInfoViewController.self) else {
-            presentController(type: PhotoInfoViewController.self, push: true)
+            presentController(type: .photoInfo, push: true)
             return
         }
         presentController(controller: photoInfoViewController)
@@ -127,7 +127,7 @@ extension ModulesCoordinator : RoutingPhotoInfoView {
 extension ModulesCoordinator : RoutingFavouritesView {
     func presentFavouritesView() {
         guard let favouritesViewController = findViewController(FavouritesViewController.self) else {
-            presentController(type: FavouritesViewController.self, push: false)
+            presentController(type: .favourites, push: false)
             return
         }
         presentController(controller: favouritesViewController)

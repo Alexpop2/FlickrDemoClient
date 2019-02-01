@@ -11,31 +11,42 @@
 import Foundation
 import UIKit
 
+enum ViewControllers {
+    case gallery
+    case photoInfo
+    case favourites
+}
+
 class ControllerPackageBuilder: ControllerPackageBuilderProtocol {
     
     private let internetService: InternetServiceInput = InternetService()
     private let database: DatabaseServiceInput = DatabaseService()
     private let modulesCoordinator : ModulesCoordinator
+
     
     init(modulesCoordinator: ModulesCoordinator){
         self.modulesCoordinator = modulesCoordinator
     }
     
-    func createPackage<T>(type: T.Type )-> (ControllerPackageProtocol?){
+    func createPackage(type: ViewControllers )-> (ControllerPackageProtocol?){
         switch type {
-        case is GalleryViewController.Type:
+        case .gallery:
             return createFlickraController()
             
-        case is PhotoInfoViewController.Type:
+        case .photoInfo:
             return createDetailPhotoController()
             
-        case is FavouritesViewController.Type:
+        case .favourites:
             return createFavoritesController()
-            
-        default:
-            return nil
         }
     }
+    
+//    func getViewController(controller: ViewControllers) {
+//        switch controller {
+//        case .gallery:
+//
+//        }
+//    }
 }
 
 extension ControllerPackageBuilder {
